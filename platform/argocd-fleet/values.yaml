@@ -1,0 +1,6 @@
+global:
+  destinationServer: https://kubernetes.default.svc
+  clusterName: argo-poc-cluster
+  targetRevision: main
+
+teams: {}
