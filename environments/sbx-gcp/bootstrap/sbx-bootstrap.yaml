@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sbx-bootstrap
+  namespace: argocd
+  labels:
+    environment: sbx-gcp
+    purpose: bootstrap
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/chandan-wonder/argo-test.git
+      targetRevision: main
+      path: platform/argocd-fleet
+      helm:
+        releaseName: argocd-fleet
+        parameters:
+          - name: environment
+            value: sbx-gcp
+          - name: global.clusterName
+            value: argo-poc-cluster
+        valueFiles:
+          - values-base.yaml
+          - ../../environments/sbx-gcp/fleets/*.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+  revisionHistoryLimit: 10
+  info:
+    - name: Purpose
+      value: Bootstrap application - entry point for entire GitOps structure
+    - name: Environment
+      value: sbx-gcp
+    - name: Pattern
+      value: Argocd-Fleet && App-of-Apps
