@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "environment",
+    "teams"
+  ],
+  "properties": {
+    "environment": {
+      "type": "string",
+      "minLength": 1
+    },
+    "global": {
+      "type": "object",
+      "properties": {
+        "destinationServer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "clusterName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetRevision": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "teams": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}
