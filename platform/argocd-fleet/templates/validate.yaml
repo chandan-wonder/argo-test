@@ -1,0 +1,4 @@
+{{- $_ := required "environment must be set by the bootstrap Application" .Values.environment -}}
+{{- if not (kindIs "map" .Values.teams) -}}
+{{- fail "teams must be a mapping (use {} for an empty sandbox fleet)" -}}
+{{- end -}}
