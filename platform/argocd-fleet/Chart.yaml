@@ -1,0 +1,6 @@
+apiVersion: v2
+name: argocd-fleet
+description: Minimal sandbox chart for validating the Argo CD bootstrap sync
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
