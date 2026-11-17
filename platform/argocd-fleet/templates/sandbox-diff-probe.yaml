@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sandbox-diff-probe
+  namespace: argocd
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    purpose: pr-diff-validation
+data:
+  message: {{ .Values.sandboxDiffProbe.message | quote }}

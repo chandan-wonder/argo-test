@@ -29,6 +29,19 @@
     },
     "teams": {
       "type": "object"
+    },
+    "sandboxDiffProbe": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
